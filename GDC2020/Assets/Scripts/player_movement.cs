@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class player_movement : MonoBehaviour
 {
-    public float move_speed = 10f;
+    public float move_speed = 7f;
+    public float turn_speed = 100f;
 
     public Rigidbody rigidbody;
 
@@ -23,12 +24,18 @@ public class player_movement : MonoBehaviour
     void FixedUpdate()
     {
         movement();
+        turn();
     }
 
     private void movement()
     {
-        Vector3 movement = transform.forward * Input.GetAxis("Vertical") * move_speed * -1;
+        Vector3 movementV = transform.forward * Input.GetAxis("Vertical") * move_speed;
 
-        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0) + movement;
+        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0) + movementV;
+    }
+
+    private void turn()
+    {
+        transform.Rotate(0, Input.GetAxis("Horizontal") * turn_speed * Time.deltaTime, 0);
     }
 }
