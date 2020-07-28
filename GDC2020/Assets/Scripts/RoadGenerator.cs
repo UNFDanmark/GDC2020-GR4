@@ -48,13 +48,13 @@ public class RoadGenerator : MonoBehaviour
             if (i % 2 == 0 && i != 1)
             {
                 //calculate the offset
-                z = (i * -2) - road_offset;
+                z = (i * -2) - (road_offset * (i / 2));
             }
             //if it is an odd number (indexing from 0)
             else if (i != 1)
             {
                 //calculate the offset
-                z = ((i - 1) * 2) + road_offset;
+                z = ((i - 1) * 2) + (road_offset * ((i - 1) / 2));
             }
 
             //place the prefab (lane) in the world
