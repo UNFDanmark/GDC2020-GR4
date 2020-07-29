@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class RoadGenerator : MonoBehaviour
 {
-    private int[] lanes_in_level = new int[5];
+    public static int[] lanes_in_level = new int[5];
 
-    private int current_lvl = 1;
+    public static int current_lvl = 1;
 
     public GameObject prefab;
 
-    public float road_offset = 0.2f;
+    public static float road_offset = 0.2f;
 
     // Start is called before the first frame update
     void Start()
