@@ -28,7 +28,6 @@ public class player_movement : MonoBehaviour
         //call the methods for movement
         movement();
         turn();
-        
     }
 
     private void movement()
