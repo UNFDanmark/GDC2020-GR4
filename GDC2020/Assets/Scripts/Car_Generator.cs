@@ -39,14 +39,14 @@ public class Car_Generator : MonoBehaviour
                 if ((i + 1) % 2 == 0 && (i + 1) != 1)
                 {
                     //calculate the offset
-                    z = ((i + 1) * -2) - (RoadGenerator.road_offset * ((i + 1) / 2));
-                    next_lower_car = z + 4f;
+                    z = ((i + 1) * -2);
+                    next_lower_car = z - 4f;
                 }
                 //if it is an odd number (indexing from 0)
-                else if (((i + 1) + 1) != 1)
+                else if ((i + 2) != 1)
                 {
                     //calculate the offset
-                    z = (((i + 1) - 1) * 2) + (RoadGenerator.road_offset * (i / 2));
+                    z = (i * 2);
                     next_higher_car = z + 4f;
                 }
 

@@ -24,7 +24,17 @@ public class Car_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //turn the car in the right direction
+        if (org_position.x == 33)
+        {
+            //if the car starts from the right, it has to point to the left -> 180degrees
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            //if the car starts from the left, it has to point to the right -> 0degrees
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     void FixedUpdate()
@@ -52,6 +62,7 @@ public class Car_Script : MonoBehaviour
 
     private void checkPosition()
     {
+        //calculate the distance of the car to the player, only z-Axis
         float distance;
         if (player_movement.zPosition < transform.position.z)
         {
@@ -61,7 +72,7 @@ public class Car_Script : MonoBehaviour
         {
             distance = player_movement.zPosition - transform.position.z;
         }
-
+        //if the distance is greater than 18m the
         if (distance > 18f)
         {
             replace();
@@ -78,18 +89,20 @@ public class Car_Script : MonoBehaviour
         //if it is a lower lane
         if (transform.position.z - 4f == Car_Generator.next_lower_car)
         {
-            Car_Generator.next_lower_car = transform.position.z;
+            Car_Generator.next_lower_car += 4f;
+            org_position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
             Car_Generator.next_higher_car += 4f;
         }
         //otherwise it must be a higher lane
         else
         {
-            Car_Generator.next_higher_car = transform.position.z;
+            Car_Generator.next_higher_car -= 4f;
+            org_position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
             Car_Generator.next_lower_car -= 4f;
         }
 
-        org_position = transform.position;
+        
     }
 }
