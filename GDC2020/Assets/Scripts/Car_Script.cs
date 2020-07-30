@@ -24,7 +24,17 @@ public class Car_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //turn the car in the right direction
+        if (org_position.x == 33)
+        {
+            //if the car starts from the right, it has to point to the left -> 180degrees
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            //if the car starts from the left, it has to point to the right -> 0degrees
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     void FixedUpdate()
@@ -52,6 +62,7 @@ public class Car_Script : MonoBehaviour
 
     private void checkPosition()
     {
+        //calculate the distance of the car to the player, only z-Axis
         float distance;
         if (player_movement.zPosition < transform.position.z)
         {
@@ -61,35 +72,49 @@ public class Car_Script : MonoBehaviour
         {
             distance = player_movement.zPosition - transform.position.z;
         }
-
+        //if the distance is greater than 18m the car will be replaced
         if (distance > 18f)
         {
+            //call the replacing method
             replace();
         }
     }
 
     private void replace()
     {
+        //var for saving randomly selected direction
         int x;
 
+        //var for saving the direction
         int dir = Random.Range(1, 3);
+        //set the x value to the propper value
         if (dir == 1) { x = 33; } else { x = -33; }
 
         //if it is a lower lane
         if (transform.position.z - 4f == Car_Generator.next_lower_car)
         {
-            Car_Generator.next_lower_car = transform.position.z;
+            //has to be incremented bc we move upwards
+            Car_Generator.next_lower_car += 4f;
+            //save the new position as the default position
+            org_position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
+            //move the car to the new position
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
+            //enhance the next highest possible position of the next car
             Car_Generator.next_higher_car += 4f;
         }
         //otherwise it must be a higher lane
         else
         {
-            Car_Generator.next_higher_car = transform.position.z;
+            //has to be decremented bc we move downwards
+            Car_Generator.next_higher_car -= 4f;
+            //save the new position as the default position
+            org_position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
+            //move the car to the new position
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
+            //decrement the next lowest possible position of the next car
             Car_Generator.next_lower_car -= 4f;
         }
 
-        org_position = transform.position;
+        
     }
 }
