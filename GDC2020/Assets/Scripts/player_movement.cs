@@ -8,6 +8,8 @@ public class player_movement : MonoBehaviour
     public float move_speed = 7f;
     public float turn_speed = 100f;
 
+    public static float zPosition = 0;
+
     public Rigidbody rigidbody;
 
     // Start is called before the first frame update
@@ -17,17 +19,14 @@ public class player_movement : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         //call the methods for movement
         movement();
         turn();
+
+        //update z Position
+        zPosition = transform.position.z;
     }
 
     private void movement()
@@ -43,5 +42,13 @@ public class player_movement : MonoBehaviour
     {
         //rotate rigidbody
         transform.Rotate(0, Input.GetAxis("Horizontal") * turn_speed * Time.deltaTime, 0);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "CAR")
+        {
+            FindObjectOfType<Game_Manager>().restartGame();
+        }
     }
 }

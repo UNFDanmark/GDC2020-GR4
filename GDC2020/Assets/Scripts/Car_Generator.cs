@@ -7,11 +7,13 @@ public class Car_Generator : MonoBehaviour
     //private vars
     private int lane_count = 0;
     private bool[] lanes;
-    private List<GameObject> cars = new List<GameObject>();
     private int current_lvl = RoadGenerator.current_lvl;
 
     //public vars
     public GameObject prefab;
+
+    public static float next_higher_car = 0;
+    public static float next_lower_car = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +40,14 @@ public class Car_Generator : MonoBehaviour
                 {
                     //calculate the offset
                     z = ((i + 1) * -2) - (RoadGenerator.road_offset * ((i + 1) / 2));
+                    next_lower_car = z + 4f;
                 }
                 //if it is an odd number (indexing from 0)
                 else if (((i + 1) + 1) != 1)
                 {
                     //calculate the offset
                     z = (((i + 1) - 1) * 2) + (RoadGenerator.road_offset * (i / 2));
+                    next_higher_car = z + 4f;
                 }
 
                 //car object
@@ -65,8 +69,6 @@ public class Car_Generator : MonoBehaviour
 
                 //set position true, representing a car
                 lanes[i] = true;
-                //add car to car list
-                cars.Add(car);
             }
         }
 
