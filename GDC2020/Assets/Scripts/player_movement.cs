@@ -17,12 +17,6 @@ public class player_movement : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         //call the methods for movement
@@ -43,5 +37,13 @@ public class player_movement : MonoBehaviour
     {
         //rotate rigidbody
         transform.Rotate(0, Input.GetAxis("Horizontal") * turn_speed * Time.deltaTime, 0);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "CAR")
+        {
+            FindObjectOfType<Game_Manager>().restartGame();
+        }
     }
 }
