@@ -107,6 +107,12 @@ public class Dog_Script : MonoBehaviour
             //and the private var of whether it is held or not will be set to true
             held = true;
         }
+        //if a car hits the dog
+        else if (collision.gameObject.tag == "CAR")
+        {
+            //the game will be restarted
+            FindObjectOfType<Game_Manager>().restartGame();
+        }
     }
 
     //method for randomly making the dog move
