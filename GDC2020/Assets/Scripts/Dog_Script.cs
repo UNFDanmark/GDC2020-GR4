@@ -111,7 +111,7 @@ public class Dog_Script : MonoBehaviour
         else if (collision.gameObject.tag == "CAR")
         {
             //the game will be restarted
-            FindObjectOfType<Game_Manager>().restartGame();
+            //FindObjectOfType<Game_Manager>().restartGame();
         }
     }
 
