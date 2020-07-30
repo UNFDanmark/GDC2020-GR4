@@ -7,7 +7,7 @@ public class Lane_Script : MonoBehaviour
     void OnBecameInvisible()
     {
         //if it is a lower lane
-        if (transform.position.z - 4 == RoadGenerator.next_lower_lane)
+        if (transform.position.z - 4f == RoadGenerator.next_lower_lane)
         {
             RoadGenerator.next_lower_lane = transform.position.z;
             transform.position = new Vector3(transform.position.x, transform.position.y, RoadGenerator.next_higher_lane);

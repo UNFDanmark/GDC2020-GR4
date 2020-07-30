@@ -47,7 +47,7 @@ public class Car_Generator : MonoBehaviour
                 {
                     //calculate the offset
                     z = (((i + 1) - 1) * 2) + (RoadGenerator.road_offset * (i / 2));
-                    next_higher_car = z + 4;
+                    next_higher_car = z + 4f;
                 }
 
                 //car object
