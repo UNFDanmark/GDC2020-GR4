@@ -6,16 +6,18 @@ using UnityEngine;
 
 public class RoadGenerator : MonoBehaviour
 {
+    //array for saving how many lanes are in what level
     public static int[] lanes_in_level = new int[5];
 
+    //the current level
     public static int current_lvl = 3;
 
+    //public static vars
     public static float next_higher_lane = 0;
     public static float next_lower_lane = 0;
 
+    //prefab for the lanes
     public GameObject prefab;
-
-    public static float road_offset = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,7 @@ public class RoadGenerator : MonoBehaviour
             {
                 //calculate the offset
                 z = (i * -2);
+                //save the highest possible new lane position for future resets
                 next_lower_lane = z - 4;
             }
             //if it is an odd number (indexing from 0)
@@ -59,6 +62,7 @@ public class RoadGenerator : MonoBehaviour
             {
                 //calculate the offset
                 z = ((i - 1) * 2);
+                //save the lowest possible new lane position for future resets
                 next_higher_lane = z + 4;
             }
 

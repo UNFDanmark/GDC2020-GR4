@@ -72,34 +72,46 @@ public class Car_Script : MonoBehaviour
         {
             distance = player_movement.zPosition - transform.position.z;
         }
-        //if the distance is greater than 18m the
+        //if the distance is greater than 18m the car will be replaced
         if (distance > 18f)
         {
+            //call the replacing method
             replace();
         }
     }
 
     private void replace()
     {
+        //var for saving randomly selected direction
         int x;
 
+        //var for saving the direction
         int dir = Random.Range(1, 3);
+        //set the x value to the propper value
         if (dir == 1) { x = 33; } else { x = -33; }
 
         //if it is a lower lane
         if (transform.position.z - 4f == Car_Generator.next_lower_car)
         {
+            //has to be incremented bc we move upwards
             Car_Generator.next_lower_car += 4f;
+            //save the new position as the default position
             org_position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
+            //move the car to the new position
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
+            //enhance the next highest possible position of the next car
             Car_Generator.next_higher_car += 4f;
         }
         //otherwise it must be a higher lane
         else
         {
+            //has to be decremented bc we move downwards
             Car_Generator.next_higher_car -= 4f;
+            //save the new position as the default position
             org_position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
+            //move the car to the new position
             transform.position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
+            //decrement the next lowest possible position of the next car
             Car_Generator.next_lower_car -= 4f;
         }
 

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class player_movement : MonoBehaviour
 {
-    //var
+    //public vars
     public float move_speed = 7f;
     public float turn_speed = 100f;
 
+    //public static vars, required for wall and camera adjustments
     public static float zPosition = 0;
 
+    //var for saving the rigidbody
     public Rigidbody rigidbody;
 
     // Start is called before the first frame update
@@ -46,8 +48,10 @@ public class player_movement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //if a car hits the player
         if (collision.gameObject.tag == "CAR")
         {
+            //the game will be restarted
             FindObjectOfType<Game_Manager>().restartGame();
         }
     }
