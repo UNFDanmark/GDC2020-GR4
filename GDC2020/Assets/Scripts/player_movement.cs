@@ -8,6 +8,8 @@ public class player_movement : MonoBehaviour
     public float move_speed = 7f;
     public float turn_speed = 100f;
 
+    public static float zPosition = 0;
+
     public Rigidbody rigidbody;
 
     // Start is called before the first frame update
@@ -22,6 +24,9 @@ public class player_movement : MonoBehaviour
         //call the methods for movement
         movement();
         turn();
+
+        //update z Position
+        zPosition = transform.position.z;
     }
 
     private void movement()

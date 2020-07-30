@@ -31,6 +31,9 @@ public class Car_Script : MonoBehaviour
     {
         //move it
         transform.Translate(car_speed * Time.deltaTime, 0, 0);
+
+        //check for new position
+        checkPosition();
     }
 
     //when collided
@@ -45,5 +48,48 @@ public class Car_Script : MonoBehaviour
             //randomly determine a new speed for the car
             car_speed = Random.Range(car_speed_min, car_speed_max + 1);
         }
+    }
+
+    private void checkPosition()
+    {
+        float distance;
+        if (player_movement.zPosition < transform.position.z)
+        {
+            distance = transform.position.z - player_movement.zPosition;
+        }
+        else
+        {
+            distance = player_movement.zPosition - transform.position.z;
+        }
+
+        if (distance > 18f)
+        {
+            replace();
+        }
+    }
+
+    private void replace()
+    {
+        int x;
+
+        int dir = Random.Range(1, 3);
+        if (dir == 1) { x = 33; } else { x = -33; }
+
+        //if it is a lower lane
+        if (transform.position.z - 4 == Car_Generator.next_lower_car)
+        {
+            Car_Generator.next_lower_car = transform.position.z;
+            transform.position = new Vector3(x, transform.position.y, Car_Generator.next_higher_car);
+            Car_Generator.next_higher_car += 4f;
+        }
+        //otherwise it must be a higher lane
+        else
+        {
+            Car_Generator.next_higher_car = transform.position.z;
+            transform.position = new Vector3(x, transform.position.y, Car_Generator.next_lower_car);
+            Car_Generator.next_lower_car -= 4f;
+        }
+
+        org_position = transform.position;
     }
 }

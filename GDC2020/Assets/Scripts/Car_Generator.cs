@@ -12,6 +12,9 @@ public class Car_Generator : MonoBehaviour
     //public vars
     public GameObject prefab;
 
+    public static float next_higher_car = 0;
+    public static float next_lower_car = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +40,14 @@ public class Car_Generator : MonoBehaviour
                 {
                     //calculate the offset
                     z = ((i + 1) * -2) - (RoadGenerator.road_offset * ((i + 1) / 2));
+                    next_lower_car = z + 4f;
                 }
                 //if it is an odd number (indexing from 0)
                 else if (((i + 1) + 1) != 1)
                 {
                     //calculate the offset
                     z = (((i + 1) - 1) * 2) + (RoadGenerator.road_offset * (i / 2));
+                    next_higher_car = z + 4;
                 }
 
                 //car object
