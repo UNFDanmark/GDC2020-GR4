@@ -8,7 +8,7 @@ public class RoadGenerator : MonoBehaviour
 {
     public static int[] lanes_in_level = new int[5];
 
-    public static int current_lvl = 1;
+    public static int current_lvl = 3;
 
     public GameObject prefab;
 
