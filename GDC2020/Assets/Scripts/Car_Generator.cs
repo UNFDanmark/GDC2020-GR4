@@ -7,7 +7,6 @@ public class Car_Generator : MonoBehaviour
     //private vars
     private int lane_count = 0;
     private bool[] lanes;
-    private List<GameObject> cars = new List<GameObject>();
     private int current_lvl = RoadGenerator.current_lvl;
 
     //public vars
@@ -65,8 +64,6 @@ public class Car_Generator : MonoBehaviour
 
                 //set position true, representing a car
                 lanes[i] = true;
-                //add car to car list
-                cars.Add(car);
             }
         }
 
