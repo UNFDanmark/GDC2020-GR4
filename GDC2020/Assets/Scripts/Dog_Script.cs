@@ -15,6 +15,11 @@ public class Dog_Script : MonoBehaviour
     public float carry_distance = 2;
     //the time the dog likes to be held
     public int hold_time_in_ticks = 100;
+    //the barks
+    public AudioClip barkOne;
+    public AudioClip barkTwo;
+    public AudioClip barkThree;
+    public AudioClip barkFour;
 
     //var for keeping track whether the dog is beeing held
     private bool held = false;
@@ -67,6 +72,33 @@ public class Dog_Script : MonoBehaviour
             //------!-Hardcode-!-------//                          //------!-Hardcode-!-------//
             hold_time_in_ticks = 100;
         }
+
+        //randomly determine whether bark should be played
+        int rndIf = Random.Range(1, 31);
+        if (rndIf == 1)
+        {
+            //randomly choose one of the four barks
+            AudioClip clip = barkOne;
+            int rndBark = Random.Range(1, 5);
+            switch (rndBark)
+            {
+                case 1:
+                    clip = barkOne;
+                    break;
+                case 2:
+                    clip = barkTwo;
+                    break;
+                case 3:
+                    clip = barkThree;
+                    break;
+                case 4:
+                    clip = barkFour;
+                    break;
+            }
+            //play the bark
+            GetComponent<AudioSource>().PlayOneShot(clip);
+        }
+
     }
 
     //is called when the dog collides with something
@@ -195,6 +227,8 @@ public class Dog_Script : MonoBehaviour
 
     private void kill()
     {
+        //play the death sound
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
         //the game will be restarted
         FindObjectOfType<Game_Manager>().restartGame();
     }
