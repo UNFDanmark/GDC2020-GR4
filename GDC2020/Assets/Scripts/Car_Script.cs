@@ -131,6 +131,5 @@ public class Car_Script : MonoBehaviour
 
         //Randomly choose material for car
         transform.GetChild(0).GetComponent<Renderer>().material = (Material)carColors[UnityEngine.Random.Range(0, carColors.Length)];
-        Debug.Log("Changed color!");
     }
 }
