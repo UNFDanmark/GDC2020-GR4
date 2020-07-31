@@ -78,7 +78,7 @@ public class Car_Script : MonoBehaviour
         {
             distance = player_movement.zPosition - transform.position.z;
         }
-        //if the distance is greater than 18m the car will be replaced
+        //if the distance is greater than 20m the car will be replaced
         if (distance >= 20f)
         {
             //call the replacing method
