@@ -9,6 +9,6 @@ public class GUI_Text_Controller : MonoBehaviour
         //var for saving time
         float time = Time.timeSinceLevelLoad;
         //set time on ui
-        GetComponent<Text>().text = "Time: " + time + " s";
+        GetComponent<Text>().text = "Time: " + time.ToString("0.00") + " s";
     }
 }
