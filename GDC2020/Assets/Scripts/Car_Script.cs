@@ -29,7 +29,7 @@ public class Car_Script : MonoBehaviour
         //give car random color
         changeColor();
 
-        waitingTime = Random.Range(3, 12);
+        waitingTime = Random.Range(3, 18);
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class Car_Script : MonoBehaviour
         if (Time.timeSinceLevelLoad - lastHonk > waitingTime)
         {
             //reset waiting time
-            waitingTime = Random.Range(3, 12);
+            waitingTime = Random.Range(8, 15);
             //save last honk
             lastHonk = Time.timeSinceLevelLoad;
             //randomly choose one of the four barks
