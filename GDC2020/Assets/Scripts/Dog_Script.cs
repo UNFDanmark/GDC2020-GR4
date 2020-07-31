@@ -31,6 +31,8 @@ public class Dog_Script : MonoBehaviour
     private Rigidbody rigidbody;
     //var for saving the current holder of the dog
     private GameObject player = null;
+    //var for keeping track of when the last bark was
+    private float lastBark = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -73,10 +75,10 @@ public class Dog_Script : MonoBehaviour
             hold_time_in_ticks = 100;
         }
 
-        //randomly determine whether bark should be played
-        int rndIf = Random.Range(1, 31);
-        if (rndIf == 1)
+        //all 4 seconds
+        if (Time.timeSinceLevelLoad - lastBark > 4)
         {
+            lastBark = Time.timeSinceLevelLoad;
             //randomly choose one of the four barks
             AudioClip clip = barkOne;
             int rndBark = Random.Range(1, 5);

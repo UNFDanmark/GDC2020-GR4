@@ -8,10 +8,16 @@ public class Car_Script : MonoBehaviour
     //vars for the cars allowed speeds
     public int car_speed_max = 12;
     public int car_speed_min = 5;
+    //the honks
+    public AudioClip honkOne;
+    public AudioClip honkTwo;
+    public AudioClip honkThree;
 
     //private vars for saving the original postion and the speed
     private int car_speed;
     private Vector3 org_position;
+    private float lastHonk = 0;
+    private int waitingTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +28,8 @@ public class Car_Script : MonoBehaviour
         org_position = transform.position;
         //give car random color
         changeColor();
+
+        waitingTime = Random.Range(3, 12);
     }
 
     // Update is called once per frame
@@ -47,6 +55,32 @@ public class Car_Script : MonoBehaviour
 
         //check for new position
         checkPosition();
+
+        //all 4 seconds
+        if (Time.timeSinceLevelLoad - lastHonk > waitingTime)
+        {
+            //reset waiting time
+            waitingTime = Random.Range(3, 12);
+            //save last honk
+            lastHonk = Time.timeSinceLevelLoad;
+            //randomly choose one of the four barks
+            AudioClip clip = honkOne;
+            int rndBark = Random.Range(1, 4);
+            switch (rndBark)
+            {
+                case 1:
+                    clip = honkOne;
+                    break;
+                case 2:
+                    clip = honkTwo;
+                    break;
+                case 3:
+                    clip = honkThree;
+                    break;
+            }
+            //play the bark
+            GetComponent<AudioSource>().PlayOneShot(clip);
+        }
     }
 
     //when collided
