@@ -104,8 +104,8 @@ public class Dog_Script : MonoBehaviour
         //if a car hits the dog
         else if (collision.gameObject.tag == "CAR")
         {
-            //the game will be restarted
-            FindObjectOfType<Game_Manager>().restartGame();
+            //kill the game
+            kill();
         }
     }
 
@@ -185,5 +185,17 @@ public class Dog_Script : MonoBehaviour
 
         //set the resttime to 0 sothat it will move as soon as it is dropped
         rest_time = 100;
+    }
+
+    void OnBecameInvisible()
+    {
+        //if the dog get out of the screen the game will restart
+        kill();
+    }
+
+    private void kill()
+    {
+        //the game will be restarted
+        FindObjectOfType<Game_Manager>().restartGame();
     }
 }
