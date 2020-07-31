@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using UnityEngine;
 
 public class Car_Script : MonoBehaviour
@@ -12,6 +13,9 @@ public class Car_Script : MonoBehaviour
     private int car_speed;
     private Vector3 org_position;
 
+    //car model
+    private GameObject carModel = Transform.Find()
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,8 @@ public class Car_Script : MonoBehaviour
         car_speed = Random.Range(car_speed_min, car_speed_max + 1);
         //save the basic postion in a Vector3
         org_position = transform.position;
+        //give car random color
+        changeColor();
     }
 
     // Update is called once per frame
@@ -57,6 +63,9 @@ public class Car_Script : MonoBehaviour
 
             //randomly determine a new speed for the car
             car_speed = Random.Range(car_speed_min, car_speed_max + 1);
+
+            //give car random color
+            changeColor();
         }
     }
 
@@ -116,5 +125,15 @@ public class Car_Script : MonoBehaviour
         }
 
         
+    }
+
+    private void changeColor()
+    {
+        //Allow Resource.LoadAll to just return a list of objects (filtered to only have materials in)
+        UnityEngine.Object[] carColors = Resources.LoadAll("carMaterials", typeof(Material));
+
+        //Randomly choose material for car
+        GetComponent<Renderer>().material = (Material)carColors[UnityEngine.Random.Range(0, carColors.Length)];
+        Debug.Log("Changed color!");
     }
 }
