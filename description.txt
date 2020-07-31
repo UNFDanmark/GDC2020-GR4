@@ -1,0 +1,23 @@
+God dag.
+Dette er spillet som vi har udviklet ved navn Rapid Traffic Doggo.
+
+
+Din hund har undsluppet dit greb or har kastet sig selv ud på midten af den uendelige motorvej.
+Dit mål? Sørg for at dig og din hund overlever så længe som menneskeligt muligt.
+Der er dog et problem. Din hun er panisk og arrig, så den har en tendens til at vriste sig fri af dit greb!
+
+
+På et mere teknisk sprog er dette et overlevelsesspil.
+Dets 3D design er blevet mikset sammen med et konstant kamera angle som giver minder om frogger.
+Dine kontrols er sat fast i et WASD keyset og sat i en konstant pace uden speed windup for at gøre spillet nemmere at lære hurtigt og formindske konflikt i de andre dele af spillet.
+Vejen er teknisk set uendelig da den bare looper omkring sig selv for at sørger for at spilleren altid har noget at gå på.
+Bilerne er randomiseret.
+Hunden har en fast sat timer for hvornår den undslipper din kontrol, hvorefter den bevæger sig i en tilfældig retning væk fra dig.
+
+
+Det er et point-baseret endless spil, ligsom et arkade spil, som var tilpads simplistisk til at lave online.
+
+CONTROLS
+  W
+A   D
+  S
