@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Dog_Script : MonoBehaviour
 {
     //var for the speed of the dog
-    public float dog_speed = 2;
+    public float dog_speed = 5;
     //vars for determening the rest-duration of the dog
     public int rest_time_lower_bound = 0;
     public int rest_time_upper_bound = 50;
@@ -36,19 +36,13 @@ public class Dog_Script : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //empty
-    }
-
     void FixedUpdate()
     {
         //if the dogs rest time is over and it is not held
         if (rest_time == 0 && !held)
         {
             //it will move
-            move();
+            move(false);
         }
         //otherwise if it is neither held
         else if (!held)
@@ -111,19 +105,25 @@ public class Dog_Script : MonoBehaviour
         else if (collision.gameObject.tag == "CAR")
         {
             //the game will be restarted
-            //FindObjectOfType<Game_Manager>().restartGame();
+            FindObjectOfType<Game_Manager>().restartGame();
         }
     }
 
     //method for randomly making the dog move
-    private void move()
+    private void move(bool afterDrop)
     {
         //the rotaion and resttime will be reset to a random value
         rest_time = Random.Range(rest_time_lower_bound, rest_time_upper_bound);
-        rotation_value = Random.Range(0, 361);
 
-        //it will rotate to the value determined
-        transform.Rotate(0, rotation_value, 0);
+        //onlz rotate if the dog has not just been droped
+        if (!afterDrop)
+        {
+            //randomly determine the rotation value
+            rotation_value = Random.Range(0, 361);
+
+            //it will rotate to the value determined
+            transform.rotation = Quaternion.Euler(0, rotation_value, 0);
+        }
 
         //calculate the vector for movement
         Vector3 movement = transform.forward * dog_speed;
@@ -154,7 +154,36 @@ public class Dog_Script : MonoBehaviour
         //reset the holding var
         held = false;
 
+        //decide in which direction the dog will run of to
+        int direction = Random.Range(1, 4);
+        float y = 0;
+        switch (direction)
+        {
+            case 1:
+                //down
+                y = 180;
+                break;
+            case 2:
+                //right
+                y = 90;
+                break;
+            case 3:
+                //up
+                y = 0;
+                break;
+        }
+        //!not to the left, bc player is to the left and would pick it up instantly
+
+        //turn the dog in the propper position
+        transform.rotation = Quaternion.Euler(0, y, 0);
+
+        //lift it abit bc otherwise it would fall back to 0 thus beeing stuck in the road
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+
+        //call move, without turning the dog again
+        move(true);
+
         //set the resttime to 0 sothat it will move as soon as it is dropped
-        rest_time = 0;
+        rest_time = 100;
     }
 }
