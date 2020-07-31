@@ -7,6 +7,7 @@ public class player_movement : MonoBehaviour
     //public vars
     public float move_speed = 7f;
     public float turn_speed = 100f;
+    public float tilt_angle = 10f;
 
     //public static vars, required for wall and camera adjustments
     public static float zPosition = 0;
@@ -25,7 +26,6 @@ public class player_movement : MonoBehaviour
     {
         //call the methods for movement
         movement();
-        turn();
 
         //update z Position
         zPosition = transform.position.z;
@@ -35,15 +35,20 @@ public class player_movement : MonoBehaviour
     {
         //calculate the vector for movement
         Vector3 movementV = transform.forward * Input.GetAxis("Vertical") * move_speed;
+        //calculate the vector for movement
+        Vector3 movementH = transform.right * Input.GetAxis("Horizontal") * move_speed;
 
         //move the rigidbody
-        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0) + movementV;
+        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0) + movementV + movementH;
+
+        //check wether the model needs to be tilted
+        checkTilt();
     }
 
-    private void turn()
+    private void checkTilt()
     {
-        //rotate rigidbody
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turn_speed * Time.deltaTime, 0);
+        //only rotate child, by manipulating the x and z angles
+        transform.GetChild(1).rotation = Quaternion.Euler(Input.GetAxis("Vertical") * tilt_angle, 0, Input.GetAxis("Horizontal") * tilt_angle * -1);
     }
 
     void OnCollisionEnter(Collision collision)
