@@ -47,8 +47,16 @@ public class player_movement : MonoBehaviour
 
     private void checkTilt()
     {
+        //reference player model
+        Transform playerModel = transform.GetChild(1);
+
+        if (rigidbody.velocity != Vector3.zero)
+        {
+            playerModel.rotation = Quaternion.Slerp(playerModel.rotation, Quaternion.LookRotation(rigidbody.velocity), 0.15f);
+        }
+        /*
         //only rotate child, by manipulating the x and z angles
-        transform.GetChild(1).rotation = Quaternion.Euler(Input.GetAxis("Vertical") * tilt_angle, 0, Input.GetAxis("Horizontal") * tilt_angle * -1);
+        playerModel.Rotate(Input.GetAxis("Vertical") * tilt_angle, 0, Input.GetAxis("Horizontal") * tilt_angle * -1);*/
     }
 
     void OnCollisionEnter(Collision collision)
