@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 2228579156757274185}
   - component: {fileID: -5023820018244919724}
   - component: {fileID: -6248868714516171115}
-  - component: {fileID: 6485538547650854195}
-  - component: {fileID: 2466945878405355395}
+  - component: {fileID: 5558182522861059766}
   m_Layer: 0
   m_Name: Car
   m_TagString: CAR
@@ -128,7 +127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   car_speed_max: 12
   car_speed_min: 5
---- !u!82 &6485538547650854195
+  honkOne: {fileID: 8300000, guid: 9f80ffff368addd4e9a0a53698835245, type: 3}
+  honkTwo: {fileID: 8300000, guid: c4564bda0b5b3c0458d17d2a6c0e53ff, type: 3}
+  honkThree: {fileID: 8300000, guid: afcf56986de191449a6545a9f9178886, type: 3}
+--- !u!82 &5558182522861059766
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +140,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9f80ffff368addd4e9a0a53698835245, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -224,19 +226,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2466945878405355395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263723127102130164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5327fd358cc82d488cb6618ea5799a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
 --- !u!1001 &13527154841194720
 PrefabInstance:
   m_ObjectHideFlags: 0
