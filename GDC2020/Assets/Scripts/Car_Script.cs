@@ -13,9 +13,6 @@ public class Car_Script : MonoBehaviour
     private int car_speed;
     private Vector3 org_position;
 
-    //car model
-    private GameObject carModel = Transform.Find()
-
     // Start is called before the first frame update
     void Start()
     {
@@ -133,7 +130,7 @@ public class Car_Script : MonoBehaviour
         UnityEngine.Object[] carColors = Resources.LoadAll("carMaterials", typeof(Material));
 
         //Randomly choose material for car
-        GetComponent<Renderer>().material = (Material)carColors[UnityEngine.Random.Range(0, carColors.Length)];
+        transform.GetChild(0).GetComponent<Renderer>().material = (Material)carColors[UnityEngine.Random.Range(0, carColors.Length)];
         Debug.Log("Changed color!");
     }
 }
